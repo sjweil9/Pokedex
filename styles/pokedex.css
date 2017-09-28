@@ -19,6 +19,7 @@
         border: 5px solid red;
         vertical-align: top;
         padding: 25px;
+        position: fixed;
     }
         h1{
             text-align: center;
