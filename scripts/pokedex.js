@@ -4,6 +4,7 @@ $(document).ready(function(){
         $('#wrapper > div:first-child').append(pokeImg);
     }
     $(document).on('click', 'img.click', function(){
+        $('#wrapper > div:last-child').html('<div><img src="images/loading.gif" alt="loading!" id="loading"></div>');
         var findurl = "https://pokeapi.co/api/v2/pokemon/" + $(this).attr('id');
         var idnum = $(this).attr('id');
         $.get(findurl, function(result){
@@ -15,9 +16,13 @@ $(document).ready(function(){
                 htmlString += "<li>" + result.types[i].type.name + "</li>";
             }
             htmlString += "</ul><h2>Height</h2><p>" + result.height + "</p><h2>Weight</h2><p>" + result.weight + "</p>";
-            $('#wrapper > div:last-child').html('<div></div>');
             $('#wrapper > div:last-child').append(htmlString);
         }, "json");
+    });
+    $(document).bind("ajaxSend", function(){
+        $('#loading').show();
+    }).bind("ajaxComplete", function(){
+        $('#loading').hide();
     });
 })
 
